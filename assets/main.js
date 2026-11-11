@@ -55,6 +55,13 @@
     $$('.gallery .g').forEach(g => g.classList.toggle('is-hidden', f !== 'all' && g.dataset.c !== f));
   }));
 
+  // Video tile: play with sound on demand
+  $$(".g--video").forEach(fig => {
+    const v = fig.querySelector("video"), b = fig.querySelector(".play");
+    b.addEventListener("click", () => { fig.classList.add("is-playing"); v.controls = true; v.play(); });
+    v.addEventListener("ended", () => { fig.classList.remove("is-playing"); v.controls = false; });
+  });
+
   // Toast for disabled links (maquette)
   const toast = $('#toast'); let t;
   const say = msg => { toast.textContent = msg; toast.classList.add('on'); clearTimeout(t); t = setTimeout(() => toast.classList.remove('on'), 2400); };

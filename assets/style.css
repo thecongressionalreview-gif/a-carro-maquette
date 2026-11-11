@@ -328,3 +328,13 @@ p{margin:0}
 }
 .hero .eyebrow{color:#f3d3b3;text-shadow:0 1px 10px rgba(0,0,0,.55)}
 @media (max-width:820px){.hero::before{background:linear-gradient(180deg,rgba(20,18,16,.6) 0%,rgba(20,18,16,.35) 35%,rgba(20,18,16,.55) 60%,rgba(20,18,16,.9) 100%)}}
+
+/* video tile */
+.g--video{background:#141210}
+.g--video video{width:100%;height:100%;object-fit:cover;display:block;background:#141210}
+.g--video .play{position:absolute;inset:0;display:grid;place-items:center;border:0;padding:0;background:transparent;cursor:pointer}
+.g--video .play span{width:74px;height:74px;border-radius:50%;background:rgba(255,253,249,.94);display:grid;place-items:center;box-shadow:0 12px 34px rgba(0,0,0,.35);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.g--video .play svg{width:28px;height:28px;margin-left:4px;fill:var(--rust)}
+.g--video .play:hover span,.g--video .play:focus-visible span{transform:scale(1.08)}
+.g--video.is-playing .play,.g--video.is-playing figcaption{display:none}
+@media (max-width:560px){.g--video{grid-row:span 3}}
