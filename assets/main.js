@@ -21,7 +21,7 @@
 
   // Header solid on scroll
   const head = $('.head');
-  const onScroll = () => head.classList.toggle('is-solid', scrollY > 40 || !menu.hidden);
+  const onScroll = () => head.classList.toggle('is-solid', scrollY > 40 || !menu.hidden || !document.querySelector('.hero'));
   addEventListener('scroll', onScroll, { passive: true });
 
   // Mobile menu
@@ -69,12 +69,7 @@
 
   // Form
   const form = $('#form');
-  const files = $('#f-photos'), list = $('#file-list');
-  files.addEventListener('change', () => {
-    const n = files.files.length;
-    if (n > 5) { list.textContent = '5 photos maximum : seules les 5 premières seront envoyées.'; return; }
-    list.textContent = n ? `${n} photo${n > 1 ? 's' : ''} sélectionnée${n > 1 ? 's' : ''}` : '';
-  });
+  if (form) {
   const check = (el, ok) => { const f = el.closest('.field'); f.classList.toggle('is-bad', !ok); $('.err', f).hidden = ok; el.setAttribute('aria-invalid', !ok); return ok; };
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -89,8 +84,21 @@
     $('#e-travaux').hidden = tr; mark(tr, $('input[name="travaux"]', form));
     $('#e-rgpd').hidden = rgpd.checked; mark(rgpd.checked, rgpd);
     if (!ok) { first.focus(); return; }
+    const v = (s) => (form.querySelector(s) || {}).value || '';
+    const travaux = $$('input[name="travaux"]:checked', form).map(c => c.value).join(', ');
+    const lines = [
+      'Bonjour Adil,', '', 'Je souhaite un devis pour : ' + travaux, '',
+      'Nom : ' + v('#f-nom'), 'Téléphone : ' + v('#f-tel'), v('#f-mail') ? 'E-mail : ' + v('#f-mail') : '',
+      'Commune du chantier : ' + v('#f-ville'), v('#f-surf') ? 'Surface approx. : ' + v('#f-surf') + ' m²' : '',
+      'Matériaux : ' + v('#f-four'), 'Délai : ' + v('#f-delai'), '', v('#f-msg'), '', 'Envoyé depuis adamcarrelage.fr',
+    ].filter((l, i, a) => l !== '' || a[i - 1] !== '');
+    const body = lines.join('\n');
+    const subject = 'Demande de devis · ' + (travaux || 'travaux') + ' · ' + v('#f-ville');
+    $('#ok-wa').href = 'https://wa.me/33768205517?text=' + encodeURIComponent(body);
+    location.href = 'mailto:contact@adamcarrelage.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     const box = $('#ok'); box.hidden = false; box.focus();
   });
 
+  }
   const y = $('#y'); if (y) y.textContent = new Date().getFullYear();
 })();

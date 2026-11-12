@@ -8,7 +8,7 @@
   --sand:#c9a77c; --rust:#9a4a24; --rust-h:#7f3b1b; --rust-soft:#f1dfd2;
   --lake:#2f7f99;
   --todo:#fff1a8; --todo-ink:#5b4b00;
-  --r:14px; --banner:26px;
+  --r:14px; --banner:0px;
   --display:"Bricolage",ui-sans-serif,system-ui,sans-serif;
   --body:"DM Sans",ui-sans-serif,system-ui,sans-serif;
   color-scheme:light;
@@ -338,3 +338,8 @@ p{margin:0}
 .g--video .play:hover span,.g--video .play:focus-visible span{transform:scale(1.08)}
 .g--video.is-playing .play,.g--video.is-playing figcaption{display:none}
 @media (max-width:560px){.g--video{grid-row:span 3}}
+
+.form__hint{font-size:.9rem;color:var(--ink-2);margin:4px 0 0}.form__hint a{color:var(--rust)}
+.ok a{color:inherit;text-decoration:underline}
+/* legal pages */
+.legal{max-width:760px;margin:0 auto;padding:150px var(--gut,20px) 90px}.legal h1{font:800 clamp(2rem,4vw,2.8rem)/1.05 var(--display);margin:0 0 28px}.legal h2{font:700 1.25rem/1.2 var(--display);margin:36px 0 10px}.legal p,.legal li{line-height:1.65;color:var(--ink-2)}.legal a{color:var(--rust)}
